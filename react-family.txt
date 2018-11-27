@@ -1,1 +1,9 @@
 
+1.运行webpack命令一直提示安装webpack-cli
+解决：
+https://segmentfault.com/q/1010000013395159/a-1020000014395848
+
+2.node_modules中的bin中文件与其他文件的区别
+
+3.../../node_modules/.bin/webpack .\testRedux.js -o build.js
+直接打包命令，参数

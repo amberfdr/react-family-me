@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import Hello from 'component/Hello/Hello';
 import { AppContainer } from 'react-hot-loader';
 import getRouter from 'router/router';
+import _ from 'lodash'
 /*初始化*/
 renderWithHotReload(getRouter())
 /*热更新  当模块更新的时候通知index.js*/
