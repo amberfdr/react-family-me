@@ -22,13 +22,25 @@ module.exports = {
             }
             ],
             include:path.join(__dirname,'src')
+        },{
+            test:/\.css$/,
+            use:['style-loader','css-loader']
+        },{
+            test:/\.(png|jpg|gif)$/,
+            use:[{
+                loader:'url-loader',
+                options:{
+                    limit:8192//小于等于8K的图片会被转成base64编码，直接插入HTML中，减少HTTP请求。
+                }
+            }]
         }]
     },
     devServer:{
         contentBase:path.join(__dirname,'dist'),
         port: 9000,
         historyApiFallback:true,
-        host:'0.0.0.0'
+        //host默认：localhost;   host:'0.0.0.0',//服务器外部访问  ：http://电脑ip:9000
+        open:true//启用 open 后，dev server 会打开浏览器。
     },
     mode: 'development',
     resolve:{
@@ -36,9 +48,9 @@ module.exports = {
             pages:path.join(__dirname,'src/pages'),
             component:path.join(__dirname,'src/component'),
             router:path.join(__dirname,'src/router'),
-            actions:path.join(__dirname,'src/actions'),
-            reducers:path.join(__dirname,'src/reducers'),
-            redux:path.join(__dirname,'src/redux')
+            actions:path.join(__dirname,'src/redux/actions'),
+            reducers:path.join(__dirname,'src/redux/reducers'),
+            reduxm:path.join(__dirname,'src/redux')
         }
     }
 }
