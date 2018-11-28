@@ -11,6 +11,7 @@ const initState = {
 };
 
 export default function userInfo(state=initState,action){
+    
     switch(action.type){
         case GET_USER_INFO_REQUEST:
         return{

@@ -2,12 +2,12 @@ import {increment,decrement,reset} from 'actions/counter';
 import store from 'reduxm/store';
 
 //打印初始状态
-console.log(store.getState());
-//state每次更新，打印日志
-//subscribe监听器返回一个函数用来注销监听器。
-let unsubscribe = store.subscribe(() => 
-    console.log(store.getState())
-);
+// console.log(store.getState());
+// //state每次更新，打印日志
+// //subscribe监听器返回一个函数用来注销监听器。
+// let unsubscribe = store.subscribe(() => 
+//     console.log(store.getState())
+// );
 
 //发起一系列的action
 //store action state 
@@ -23,4 +23,4 @@ let unsubscribe = store.subscribe(() =>
 //store.dispatch(reset());
 
 //停止监听state
-unsubscribe();
+// unsubscribe();

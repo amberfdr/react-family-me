@@ -1,15 +1,29 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');//在页面加载的时候把相应js加到模板index.html中
 module.exports = {
     //多个入口，入口有多少个，就代表被打成多少个包
-    entry: [
-        'react-hot-loader/patch',
-        path.join(__dirname,'src/index.js'),
-        path.join(__dirname,'src/redux/testRedux.js')
-    ],//__dirname变量:程序运行的根目录  join()将字符串拼接在一起
+    entry:{
+        app:[
+            'react-hot-loader/patch',
+            path.join(__dirname,'src/index.js')
+        ],
+        vendor:['react','redux','react-router-dom','react-redux','react-dom']//将公共的三方库打包
+    },//__dirname变量:程序运行的根目录  join()将字符串拼接在一起
+    //plugins
+    optimization:{
+        splitChunks:{
+            name:'vendor'
+        }
+    },
     output:{
         path:path.join(__dirname,'./dist'),
-        filename:'[name].js'
+        filename:'[name].[hash].js',
+        chunkFilename:'[name].[chunkhash].js'
     },
+    plugins:[new HtmlWebpackPlugin({
+        filename:'index.html',
+        template:path.join(__dirname,'src/index.html')
+    })],
     module:{
         rules:[{
             test:/\.js$/,

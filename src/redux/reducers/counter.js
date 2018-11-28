@@ -20,7 +20,7 @@ export default function counter (state=initState,action){
             count:0
         }
         default:
-        console.log('默认state');
+        console.log('默认state  counter',action.type);
         return state
         
     }
