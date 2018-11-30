@@ -22,19 +22,27 @@ function getUserInfoFail(){
 //这里需要redux-thunk 涉及到middleWare中间件
 //因为reducer只能处理{type:...}这样的action,不能处理action函数，
 //所有redux-thunk的作用：将action函数处理成标准action,然后让reducer处理
+// export function getUserInfo(){
+//     return function(dispatch){
+//         dispatch(getUserInfoRequest());
+//         return fetch('http://localhost:9000/api/user.json')
+//         .then((res) => {
+//             console.log(res);
+//             return res.json();//转换成json格式
+//         })
+//         .then((json) => {
+//             dispatch(getUserInfoSuccess(json))//返回成功的值
+//         })
+//         .catch(() => {
+//             dispatch(getUserInfoFail())
+//         })
+//     }
+// }
+
+//利用axios
 export function getUserInfo(){
-    return function(dispatch){
-        dispatch(getUserInfoRequest());
-        return fetch('http://localhost:9000/api/user.json')
-        .then((res) => {
-            console.log(res);
-            return res.json();//转换成json格式
-        })
-        .then((json) => {
-            dispatch(getUserInfoSuccess(json))//返回成功的值
-        })
-        .catch(() => {
-            dispatch(getUserInfoFail())
-        })
+    return {
+        types:[GET_USER_INFO_REQUEST,GET_USER_INFO_SUCCESS,GET_USER_INFO_FAIL],
+        promise:client => client.get('http://localhost:9000/api/user.json')
     }
 }

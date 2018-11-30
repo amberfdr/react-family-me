@@ -5,7 +5,10 @@ import combineReducers from 'reduxm/reducers';
 //因为reducer只能处理{type:...}这样的action,不能处理action函数，
 //所有redux-thunk的作用：将action函数处理成标准action,然后让reducer处理
 
-let store = createStore(combineReducers,applyMiddleware(thunkMiddleware));
+//引入自己自定义的中间件
+import promiseMiddleware from './middleware/promiseMiddleware';
+let store = createStore(combineReducers,applyMiddleware(promiseMiddleware));
+//let store = createStore(combineReducers,applyMiddleware(thunkMiddleware));
 export default store;
 
 

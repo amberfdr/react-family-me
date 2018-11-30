@@ -2,6 +2,9 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const UglifyjsPlugin = require('uglifyjs-webpack-plugin');//文件压缩
 const webpack = require('webpack');
+const CleanWebpackPlugin = require('clean-webpack-plugin');//每次打包前清除历史打包文件
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");//抽取css,分开打包
+const axios = require('axios');
 module.exports = {
     devtool:'cheap-module-source-map',
     entry:{
@@ -17,6 +20,7 @@ module.exports = {
         }
     },
     output:{
+        publicPath:'/',
         path:path.join(__dirname,'./dist'),
         filename:'[name].[chunkhash].js',
         chunkFilename:'[name].[chunkhash].js'
@@ -34,7 +38,14 @@ module.exports = {
                 'NODE_ENV': JSON.stringify('production')
              }
          }),
-         new webpack.HashedModuleIdsPlugin()
+         new webpack.HashedModuleIdsPlugin(),
+         new CleanWebpackPlugin(['dist']),
+         new MiniCssExtractPlugin({
+            // Options similar to the same options in webpackOptions.output
+            // both options are optional
+            filename: "[name].css",
+            chunkFilename: "[id].css"
+          })
         
     ],
     optimization:{
@@ -51,10 +62,8 @@ module.exports = {
             ],
             exclude:path.join(__dirname,'node_modules'),
             include:path.join(__dirname,'src')
-        },{
-            test:/\.css$/,
-            use:['style-loader','css-loader']
-        },{
+        },
+        {
             test:/\.(png|jpg|gif)$/,
             use:[{
                 loader:'url-loader',
@@ -62,7 +71,16 @@ module.exports = {
                     limit:8192
                 }
             }]
-        }]
+        },
+        {
+            test: /\.css$/,
+            use: [
+              {
+                loader: MiniCssExtractPlugin.loader,
+              },
+              "css-loader"
+            ]
+          }]
     },
     resolve:{
         alias:{

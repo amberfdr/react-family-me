@@ -5,7 +5,6 @@ import { Provider } from 'react-redux';//Provider组件是让所有的组件可�
 import store from 'reduxm/store'
 import getRouter from 'router/router';
 import _ from 'lodash'
-console.log(process.env)
 /*初始化*/
 renderWithHotReload(getRouter())
 /*热更新  当模块更新的时候通知index.js*/
