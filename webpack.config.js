@@ -25,6 +25,7 @@ const publicConfig = {
           })
         
     ],
+    
     module:{
         rules:[{
             test: /\.css$/,
@@ -32,7 +33,7 @@ const publicConfig = {
               {
                 loader: MiniCssExtractPlugin.loader,
               },
-              "css-loader"
+              "css-loader?modules&localIdentName=[local]-[hash:base64:5]",'postcss-loader'
             ]
         }]
     }

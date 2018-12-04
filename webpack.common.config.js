@@ -65,7 +65,8 @@ const commonConfig = {
             filename:'index.html',
             template:path.join(__dirname,'src/index.html')
         }),
-        new webpack.HashedModuleIdsPlugin()
+        new webpack.HashedModuleIdsPlugin(),
+        
         // ,
         // new UglifyjsPlugin({
         //     sourceMap: true
@@ -88,7 +89,8 @@ const commonConfig = {
             router:path.join(__dirname,'src/router'),
             actions:path.join(__dirname,'src/redux/actions'),
             reducers:path.join(__dirname,'src/redux/reducers'),
-            reduxm:path.join(__dirname,'src/redux')
+            reduxm:path.join(__dirname,'src/redux'),
+            mock:path.join(__dirname,'mock')
         }
     }
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter ,Switch,Router,Route,Link} from 'react-router-dom';
+import {BrowserRouter ,Switch,Router,Route,Link,Redirect} from 'react-router-dom';
 import Loadable from 'react-loadable';
 import Loading from 'components/Loading/Loading'
 const Home = Loadable({loader:() => import('pages/Home'),loading:Loading,delay:300});//默认delay:200
@@ -15,6 +15,7 @@ const getRouter = () => (
             <Route path='/counter' component={Counter}/>
             <Route path='/userinfo' component={UserInfo}/>
             <Route path='/404' component={NotFound}/>
+            <Redirect from="*" to="/404"/>
         </Switch>
     </div>
 )

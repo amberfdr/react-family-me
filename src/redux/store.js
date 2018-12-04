@@ -7,6 +7,13 @@ import combineReducers from 'reduxm/reducers';
 
 //引入自己自定义的中间件
 import promiseMiddleware from './middleware/promiseMiddleware';
+//redux 模块热替换配置
+if(module.hot){
+    module.hot.accept('./reducers',()=>{
+        const nextCombineReducers = require('./reducers').default;
+        store.replaceReducer(nextCombineReducers);
+    })
+}
 let store = createStore(combineReducers,applyMiddleware(promiseMiddleware));
 //let store = createStore(combineReducers,applyMiddleware(thunkMiddleware));
 export default store;

@@ -6,6 +6,11 @@ import store from 'reduxm/store'
 import App from 'components/App/App';
 import _ from 'lodash'
 
+//引入mock数据
+//import mock from 'mock/mock';
+if(MOCK){
+    require('mock/mock');
+}
 import {BrowserRouter ,Switch,Router,Route,Link} from 'react-router-dom';
 /*初始化*/
 renderWithHotReload(App);//将其他的抽象成组件，开始是函数
